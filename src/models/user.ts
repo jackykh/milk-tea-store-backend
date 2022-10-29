@@ -21,9 +21,13 @@ const userSchema = new Schema({
     type: String,
     default: "",
   },
+  group: {
+    type: String,
+    default: "user",
+  },
   avatar: {
     type: String,
-    default: "images/DefaultIcon.png",
+    default: "images/avatar/defaultIcon.png",
   },
 });
 

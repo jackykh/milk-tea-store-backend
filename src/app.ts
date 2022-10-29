@@ -7,6 +7,8 @@ dotenv.config();
 
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/user.js";
+import adminRoutes from "./routes/admin.js";
+import productsRoutes from "./routes/products.js";
 const __dirname = path.resolve();
 
 interface Error {
@@ -35,8 +37,11 @@ app.use("/auth", authRoutes);
 
 app.use("/api/user", userRoutes);
 
+app.use("/api/products", productsRoutes);
+
+app.use("/admin", adminRoutes);
+
 app.use((error: Error, _req: Request, res: Response, _next: NextFunction) => {
-  console.log(error);
   res
     .status(error.cause.code || 400)
     .json({ message: error.message || "Unknown Error" });

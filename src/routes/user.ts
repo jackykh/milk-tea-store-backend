@@ -8,7 +8,8 @@ const router = express.Router();
 
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "images");
+    const path = "./images/avatar";
+    cb(null, path);
   },
   filename: (req, file, cb) => {
     cb(null, new Date().toISOString() + "-" + file.originalname);

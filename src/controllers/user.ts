@@ -11,12 +11,13 @@ export const getUserInfo: RequestHandler = async (req, res, next) => {
       error.cause = { code: 401 };
       throw error;
     }
-    const { email, firstName, lastName, phoneNumber, avatar } = user;
+    const { email, firstName, lastName, phoneNumber, group, avatar } = user;
     const userInfo = {
       email,
       firstName,
       lastName,
       phoneNumber,
+      group,
       avatar,
     };
     res.status(200).json(userInfo);

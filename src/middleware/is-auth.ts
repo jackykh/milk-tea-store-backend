@@ -14,7 +14,7 @@ const isAuth: RequestHandler = (req, _res, next) => {
   try {
     const authHeader = req.get("Authorization");
     if (!authHeader) {
-      const error = new Error("Not authenticated.");
+      const error = new Error("Not Authorized.");
       error.cause = { code: 401 };
       throw error;
     }
