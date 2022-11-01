@@ -1,7 +1,7 @@
 import express, { Request } from "express";
 import isAuth from "../middleware/is-auth.js";
-import { getUserInfo } from "../controllers/user.js";
-import { changeUserInfo } from "../controllers/user.js";
+import { getUserInfo, changeUserInfo, likeItem } from "../controllers/user.js";
+
 import multer, { FileFilterCallback } from "multer";
 
 const router = express.Router();
@@ -36,5 +36,7 @@ const upload = multer({ storage: fileStorage, fileFilter });
 router.get("/get_userinfo", isAuth, getUserInfo);
 
 router.put("/change_userinfo", isAuth, upload.single("avatar"), changeUserInfo);
+
+router.put("/like_item", isAuth, likeItem);
 
 export default router;

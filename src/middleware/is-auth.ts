@@ -19,7 +19,7 @@ const isAuth: RequestHandler = (req, _res, next) => {
       throw error;
     }
     const token = authHeader.split(" ")[1];
-    let decodedToken;
+    let decodedToken: jwt.UserIDJwtPayload;
     decodedToken = <jwt.UserIDJwtPayload>(
       jwt.verify(token, process.env.SECRET_KEY as string)
     );

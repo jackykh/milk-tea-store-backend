@@ -13,18 +13,18 @@ const userSchema = new Schema({
     type: String,
     default: "用戶",
   },
-  lastName: {
-    type: String,
-    default: "",
-  },
-  phoneNumber: {
-    type: String,
-    default: "",
-  },
+  lastName: String,
+  phoneNumber: String,
   group: {
     type: String,
     default: "user",
   },
+  likeItems: {
+    type: Array<String>,
+    default: [],
+  },
+  resetToken: String,
+  resetTokenExpiration: Date,
   avatar: {
     type: String,
     default: "images/avatar/defaultIcon.png",

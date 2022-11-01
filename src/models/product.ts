@@ -17,6 +17,10 @@ const productSchema = new Schema({
     type: Number,
     require: true,
   },
+  likes: {
+    type: Number,
+    default: 0,
+  },
   photos: [
     {
       type: String,

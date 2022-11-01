@@ -2,7 +2,14 @@ import express from "express";
 import { body } from "express-validator";
 
 import User from "../models/user.js";
-import { signup, login } from "../controllers/auth.js";
+import {
+  signup,
+  login,
+  changePassword,
+  sendResetEmail,
+  postNewPassword,
+} from "../controllers/auth.js";
+import isAuth from "../middleware/is-auth.js";
 
 const router = express.Router();
 
@@ -25,5 +32,11 @@ router.put(
 );
 
 router.post("/login", login);
+
+router.patch("/change_password", isAuth, changePassword);
+
+router.post("/send_reset_email", sendResetEmail);
+
+router.patch("/reset_password", postNewPassword);
 
 export default router;

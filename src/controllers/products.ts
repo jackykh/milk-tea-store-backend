@@ -26,11 +26,25 @@ export const getProducts: RequestHandler = async (req, res, next) => {
       currentPage = +req.query.page || 1;
     }
     const itemsPerPage = 6;
-    const totalItems = await Product.find().countDocuments();
-    const items = await Product.find()
-      .skip((currentPage - 1) * itemsPerPage)
-      .limit(itemsPerPage);
-    const adjustedItems = items.map((item) => {
+    let order = "price";
+    const orderOptions = ["price", "likes"];
+    if (orderOptions.includes(req.query.order as string)) {
+      order = req.query.order as string;
+    }
+
+    const searchOption = req.query.search
+      ? { productName: { $regex: req.query.search } }
+      : {};
+
+    const result = await Promise.all([
+      Product.find(searchOption).countDocuments(),
+      Product.find(searchOption)
+        .sort({ [order]: -1 })
+        .skip((currentPage - 1) * itemsPerPage)
+        .limit(itemsPerPage),
+    ]);
+
+    const adjustedItems = result[1].map((item) => {
       return {
         id: item._id,
         name: item.productName,
@@ -40,7 +54,7 @@ export const getProducts: RequestHandler = async (req, res, next) => {
     });
     res.status(200).json({
       products: adjustedItems,
-      totalItems,
+      totalItems: result[0],
     });
   } catch (error: any) {
     if (!error.cause) {
