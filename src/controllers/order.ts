@@ -21,6 +21,8 @@ export const addOrder: RequestHandler = async (req, res, next) => {
     const userId = req.userId;
 
     const items: orderType = req.body.orderItems;
+    // const email: string = req.body.email;
+    const address: string = req.body.address;
 
     const products = await Promise.all(
       items.map((item) => {
@@ -63,23 +65,43 @@ export const addOrder: RequestHandler = async (req, res, next) => {
     });
 
     const charge = await stripe.charges.create({
-      amount: totalPrice,
-      currency: "usd",
+      amount: totalPrice * 100,
+      currency: "hkd",
       source: token.id,
-      description:
-        "My First Test Charge (created for API docs at https://www.stripe.com/docs/api)",
+      description: `user-${userId}_order`,
     });
 
     const order = new Order({
       buyerId: userId,
       orderItems,
       totalPrice,
+      address,
+      chargeId: charge.id,
     });
+
     const result = await order.save();
 
-    res.status(200).json({ message: "sucess", result: result, charge });
+    res.status(200).json({
+      message: "成功下單！",
+      result: result,
+    });
   } catch (error: any) {
     console.log(error);
+    if (!error.cause) {
+      error.cause = { code: 500 };
+    }
+    next(error);
+  }
+};
+
+export const getOrderByUserId: RequestHandler = async (req, res, next) => {
+  try {
+    const userId = req.userId;
+    const result = await Order.find({ buyerId: userId });
+    res.status(200).json({
+      result: result,
+    });
+  } catch (error: any) {
     if (!error.cause) {
       error.cause = { code: 500 };
     }
