@@ -13,18 +13,10 @@ const router = express.Router();
 const fileStorage = multer.diskStorage({
   destination: (req, _file, cb) => {
     const { engName } = JSON.parse(req.body.productInfo);
-    const adjustedName = (engName as String).replace(/\s+/g, "_");
+    const adjustedName = (engName as string).replace(/\s+/g, "_");
     const path = `./images/products/${adjustedName}`;
     if (!fs.existsSync(path)) {
       fs.mkdirSync(path);
-    } else {
-      fs.readdirSync(path).forEach((file) => {
-        fs.unlink(`${path}/${file}`, (error) => {
-          if (error) {
-            console.log(error);
-          }
-        });
-      });
     }
     cb(null, path);
   },

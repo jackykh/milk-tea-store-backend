@@ -9,12 +9,9 @@ type orderType = Array<{
   quantity: number;
 }>;
 
-const stripe = new Stripe(
-  "sk_test_51LiZskKyV0chAEWcIBo5chNBd5yueKfkhqMPuCNcXC21nonFZ1kOCpqHwoYh7hmEH1w2wnyO2m2LvpmgLlhwSdr500GFlWZxxe",
-  {
-    apiVersion: "2022-08-01",
-  }
-);
+const stripe = new Stripe(process.env.STRIPE_API_KEY as string, {
+  apiVersion: "2022-08-01",
+});
 
 export const addOrder: RequestHandler = async (req, res, next) => {
   try {

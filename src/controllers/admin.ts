@@ -84,7 +84,7 @@ export const deleteProduct: RequestHandler = async (req, res, next) => {
     }
     const product = await Product.findById(req.body.productId);
     if (product) {
-      const adjustedName = (product.engName as String).replace(/\s+/g, "_");
+      const adjustedName = (product.engName as string).replace(/\s+/g, "_");
       const path = `./images/products/${adjustedName}`;
       fs.rmSync(path, { recursive: true, force: true });
       const result = await product.remove();

@@ -16,7 +16,7 @@ const Order = new Schema(
           type: Number,
           required: true,
         },
-        options: Array<String>,
+        options: Array<string>,
       },
     ],
     totalPrice: {

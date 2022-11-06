@@ -52,5 +52,8 @@ app.use((error: Error, _req: Request, res: Response, _next: NextFunction) => {
 });
 
 connect(process.env.MONGODB_STRING as string)
-  .then((_result) => app.listen(8080))
+  .then((_result) => {
+    app.listen(8080);
+    console.log("listen on port 8080.");
+  })
   .catch((err) => console.log(err));

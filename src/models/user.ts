@@ -20,7 +20,7 @@ const userSchema = new Schema({
     default: "user",
   },
   likeItems: {
-    type: Array<String>,
+    type: Array<string>,
     default: [],
   },
   resetToken: String,

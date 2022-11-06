@@ -67,7 +67,7 @@ export const login: RequestHandler = async (req, res, next) => {
   try {
     const email = req.body.email;
     const password = req.body.password;
-    let isEqual: boolean = false;
+    let isEqual = false;
     const user = await User.findOne({ email: email });
     if (!user) {
       const error = new Error("User not found");
@@ -112,7 +112,7 @@ export const changePassword: RequestHandler = async (req, res, next) => {
       error.cause = { code: 401 };
       throw error;
     }
-    let isEqual: boolean = false;
+    let isEqual = false;
     if (user.password) {
       isEqual = await bcrypt.compare(oldPassword, user.password);
     }

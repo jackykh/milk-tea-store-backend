@@ -21,7 +21,7 @@ export const getProduct: RequestHandler = async (req, res, next) => {
 
 export const getProducts: RequestHandler = async (req, res, next) => {
   try {
-    let currentPage: number = 1;
+    let currentPage = 1;
     if (req.query.page) {
       currentPage = +req.query.page || 1;
     }
