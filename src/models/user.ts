@@ -27,7 +27,7 @@ const userSchema = new Schema({
   resetTokenExpiration: Date,
   avatar: {
     type: String,
-    default: "images/avatar/defaultIcon.png",
+    default: "public/default/defaultIcon.png",
   },
 });
 

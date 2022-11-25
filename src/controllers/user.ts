@@ -53,7 +53,7 @@ export const changeUserInfo: RequestHandler = async (req, res, next) => {
     let imageUrl = avatar;
     if (req.file) {
       imageUrl = req.file.path;
-      if (avatar !== "images/avatar/defaultIcon.png") {
+      if (avatar !== "public/default/defaultIcon.png") {
         const oldUrl = path.join(path.resolve(), avatar);
         fs.unlink(oldUrl, (err) => {
           if (err) {

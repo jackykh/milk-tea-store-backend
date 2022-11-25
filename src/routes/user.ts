@@ -1,3 +1,4 @@
+import fs from "fs";
 import express, { Request } from "express";
 import isAuth from "../middleware/is-auth.js";
 import { getUserInfo, changeUserInfo, likeItem } from "../controllers/user.js";
@@ -8,7 +9,10 @@ const router = express.Router();
 
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const path = "./images/avatar";
+    const path = "./uploads/avatar";
+    if (!fs.existsSync(path)) {
+      fs.mkdirSync(path, { recursive: true });
+    }
     cb(null, path);
   },
   filename: (req, file, cb) => {

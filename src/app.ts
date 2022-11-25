@@ -23,7 +23,8 @@ interface Error {
 const app = express();
 app.use(express.json()); // application/json
 
-app.use("/images", express.static(path.join(__dirname, "images")));
+app.use("/public", express.static(path.join(__dirname, "public")));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use((_req: Request, res: Response, next: NextFunction) => {
   res.setHeader("Access-Control-Allow-Origin", "*");

@@ -12,8 +12,8 @@ processes = []
   auto_rollback = true
 
 [mounts]
-  destination = "./images"
-  source = "images_vol"
+  destination = "/usr/src/app/uploads"
+  source = "myapp_data"
 
 [[services]]
   http_checks = []

@@ -14,9 +14,9 @@ const fileStorage = multer.diskStorage({
   destination: (req, _file, cb) => {
     const { engName } = JSON.parse(req.body.productInfo);
     const adjustedName = (engName as string).replace(/\s+/g, "_");
-    const path = `./images/products/${adjustedName}`;
+    const path = `./uploads/products/${adjustedName}`;
     if (!fs.existsSync(path)) {
-      fs.mkdirSync(path);
+      fs.mkdirSync(path, { recursive: true });
     }
     cb(null, path);
   },
