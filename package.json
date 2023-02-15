@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start" : "node ./build/app.js",
-    "ts-node": "node --loader ts-node/esm ./src/app.ts",
+    "dev": "node --loader ts-node/esm ./src/app.ts",
+    "build": "tsc",
     "lint": "eslint **/*.ts ."
   },
   "author": "",

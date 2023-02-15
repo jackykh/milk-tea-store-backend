@@ -11,7 +11,8 @@ import orderRoutes from "./routes/order.js";
 const __dirname = path.resolve();
 const app = express();
 app.use(express.json()); // application/json
-app.use("/images", express.static(path.join(__dirname, "images")));
+app.use("/public", express.static(path.join(__dirname, "public")));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use((_req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, PATCH, DELETE");
