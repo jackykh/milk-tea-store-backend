@@ -50,6 +50,11 @@ export const changeUserInfo: RequestHandler = async (req, res, next) => {
       error.cause = { code: 401 };
       throw error;
     }
+    if (user.email === email) {
+      const error = new Error("This email has been used by other account.");
+      error.cause = { code: 401 };
+      throw error;
+    }
     let imageUrl = avatar;
     if (req.file) {
       imageUrl = req.file.path;
